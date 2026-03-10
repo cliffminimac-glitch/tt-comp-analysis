@@ -28,6 +28,7 @@ body { font-family:'Montserrat',sans-serif; background:var(--bg); color:var(--te
 .cl-entry-item[data-color="purple"]::before{background:#7c3aed;}
 .cl-entry-item[data-color="pink"]::before{background:#db2777;}
 .cl-entry-item[data-color="teal"]::before{background:#229FA1;}
+.cl-entry-item[data-color="gray"]::before{background:#94a3b8;}
 .header { background:linear-gradient(135deg,#1a1a2e,#16213e); color:#fff; padding:1.5rem 2rem; display:flex; align-items:center; gap:1rem; }
 .header img { height:36px; }
 .header h1 { font-size:1.15rem; }
@@ -548,13 +549,16 @@ th { background:var(--bg); font-weight:700; font-size:.75rem; text-transform:upp
     <p style="font-size:.82rem;color:var(--text-light);margin-bottom:1.25rem;">Team members currently flagged for performance issues. Documented concerns and action items below.</p>
 
     <!-- Bruno Milalaf -->
-    <div style="border:1px solid #fecaca;border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;background:#fef2f2;">
+    <div style="border:1px solid #d1d5db;border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;background:#f9fafb;opacity:.85;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem;">
         <div>
-          <h4 style="font-size:.95rem;margin-bottom:.15rem;">Bruno Milalaf</h4>
+          <h4 style="font-size:.95rem;margin-bottom:.15rem;text-decoration:line-through;color:#6b7280;">Bruno Milalaf</h4>
           <span style="font-size:.82rem;color:var(--text-light);">Account Manager | $100,000 | Reports to Charlotte Pohl</span>
         </div>
-        <span class="badge" style="background:#fecaca;color:#dc2626;font-weight:700;">Not in Good Standing</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;">
+          <span class="badge" style="background:#1f2937;color:#f9fafb;font-weight:700;">🚫 Terminated</span>
+          <span style="font-size:.75rem;color:#6b7280;">March 9, 2026</span>
+        </div>
       </div>
       <div style="margin-bottom:.75rem;">
         <strong style="font-size:.82rem;">Documented Issues (Feb 13, 2026 C/B/R Sync)</strong>
@@ -741,13 +745,14 @@ th { background:var(--bg); font-weight:700; font-size:.75rem; text-transform:upp
 <div class="section" id="sec-changelog">
   <div class="card">
     <h2>📝 Employee Change Log</h2>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:.75rem;">All compensation and title changes from hire date through Feb 2026 · 42 changes across 25 employees</p>
+    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:.75rem;">All compensation and title changes from hire date through Mar 2026 · 43 changes across 25 employees</p>
     <div style="display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap;align-items:center;">
       <button class="cl-type-btn active" data-type="all" onclick="clTypeFilter(this)">All</button>
       <button class="cl-type-btn" data-type="New Hire" onclick="clTypeFilter(this)">New Hire</button>
       <button class="cl-type-btn" data-type="Raise" onclick="clTypeFilter(this)">Raise</button>
       <button class="cl-type-btn" data-type="Promotion" onclick="clTypeFilter(this)">Promotion</button>
       <button class="cl-type-btn" data-type="combo" onclick="clTypeFilter(this)">Promotion + Raise</button>
+      <button class="cl-type-btn" data-type="Termination" onclick="clTypeFilter(this)">Termination</button>
     </div>
     <div style="display:flex;gap:.75rem;margin-bottom:.75rem;flex-wrap:wrap;align-items:center;">
       <input type="text" id="clSearch" placeholder="Search by name..." oninput="filterChangeLog()" style="max-width:220px;">
@@ -1135,6 +1140,7 @@ var clRows = [
   {name:"McCambridge, Mary",date:"10/20/2025",type:"New Hire",prevTitle:"",newTitle:"Senior Account Manager",prevSal:"",newSal:"$135,000",pct:""},
   {name:"McDaniel, Seth",date:"02/02/2026",type:"New Hire",prevTitle:"",newTitle:"Account Strategist",prevSal:"",newSal:"$95,000",pct:""},
   {name:"Millalaf, Bruno",date:"12/01/2025",type:"New Hire",prevTitle:"",newTitle:"Account Manager",prevSal:"",newSal:"$100,000",pct:""},
+  {name:"Millalaf, Bruno",date:"03/09/2026",type:"Termination",prevTitle:"Account Manager",newTitle:"",prevSal:"$100,000",newSal:"",pct:""},
   {name:"Nations, Jessica Shelby",date:"02/10/2025",type:"New Hire",prevTitle:"",newTitle:"Senior Account Manager",prevSal:"",newSal:"$140,000",pct:""},
   {name:"Phipps, Owen",date:"12/01/2024",type:"Raise",prevTitle:"",newTitle:"",prevSal:"$62,000",newSal:"$70,000",pct:"12.90%"},
   {name:"Phipps, Owen",date:"04/21/2025",type:"Raise",prevTitle:"Account Coordinator",newTitle:"Account Coordinator",prevSal:"$70,000",newSal:"$75,000",pct:"7.14%"},
@@ -1188,7 +1194,8 @@ var typeMeta={
   "Raise":{label:"Raise",icon:"↑",bg:"#dcfce7",color:"#059669",dot:"green"},
   "Promotion":{label:"Promotion",icon:"★",bg:"#ede9fe",color:"#7c3aed",dot:"purple"},
   "Raise + Promotion":{label:"Promotion + Raise",icon:"◆",bg:"#fce7f3",color:"#db2777",dot:"pink"},
-  "Promotion + Raise":{label:"Promotion + Raise",icon:"◆",bg:"#fce7f3",color:"#db2777",dot:"pink"}
+  "Promotion + Raise":{label:"Promotion + Raise",icon:"◆",bg:"#fce7f3",color:"#db2777",dot:"pink"},
+  "Termination":{label:"Termination",icon:"✕",bg:"#f1f5f9",color:"#64748b",dot:"gray"}
 };
 
 var clActiveType='all';
