@@ -120,6 +120,7 @@ th { background:var(--bg); font-weight:700; font-size:.75rem; text-transform:upp
   <div class="tab" onclick="switchTab('performance')">⚠️ Performance Actions</div>
   <div class="tab" onclick="switchTab('overview')">📊 Band Overview</div>
   <div class="tab" onclick="switchTab('q2q4')">📈 Q2-Q4 Planning</div>
+  <div class="tab" onclick="switchTab('payroll')">💳 Payroll Schedule</div>
 </div>
 
 <!-- HOME -->
@@ -767,6 +768,58 @@ th { background:var(--bg); font-weight:700; font-size:.75rem; text-transform:upp
 
 </div>
 
+
+<!-- PAYROLL SCHEDULE -->
+<div class="section" id="sec-payroll">
+  <div class="card">
+    <h2>💳 Payroll Processing Schedule</h2>
+    <p style="font-size:.85rem;color:var(--text-light);margin-bottom:1.25rem;">Tiger Tracks LLC · Bi-Weekly · Client ID: 4688 · Generated 2/9/2026</p>
+
+    <!-- Next pay date banner -->
+    <div id="payroll-next-banner" style="background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;gap:2rem;flex-wrap:wrap;align-items:center;">
+      <div>
+        <div style="font-size:.75rem;opacity:.8;text-transform:uppercase;letter-spacing:.05em;">Next Pay Date</div>
+        <div id="payroll-next-date" style="font-size:1.4rem;font-weight:800;">—</div>
+      </div>
+      <div>
+        <div style="font-size:.75rem;opacity:.8;text-transform:uppercase;letter-spacing:.05em;">Current Pay Period</div>
+        <div id="payroll-current-period" style="font-size:1.1rem;font-weight:700;">—</div>
+      </div>
+      <div>
+        <div style="font-size:.75rem;opacity:.8;text-transform:uppercase;letter-spacing:.05em;">Submission Deadline</div>
+        <div id="payroll-submit-deadline" style="font-size:1.1rem;font-weight:700;">—</div>
+      </div>
+      <div style="margin-left:auto;font-size:.8rem;opacity:.75;">Days until pay day: <span id="payroll-days-away" style="font-weight:700;">—</span></div>
+    </div>
+
+    <!-- Year filter -->
+    <div style="display:flex;gap:.5rem;margin-bottom:1rem;align-items:center;">
+      <span style="font-size:.82rem;color:var(--text-light);font-weight:600;">Show:</span>
+      <button onclick="filterPayrollYear('all')" id="pyr-all" class="pyr-btn pyr-active" style="font-size:.78rem;padding:.3rem .75rem;border-radius:20px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;">All</button>
+      <button onclick="filterPayrollYear('2026')" id="pyr-2026" class="pyr-btn" style="font-size:.78rem;padding:.3rem .75rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;">2026</button>
+      <button onclick="filterPayrollYear('2027')" id="pyr-2027" class="pyr-btn" style="font-size:.78rem;padding:.3rem .75rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;">2027</button>
+      <span style="margin-left:auto;font-size:.78rem;color:var(--text-light);">Bi-weekly · 26–27 periods/year</span>
+    </div>
+
+    <!-- Table -->
+    <div style="overflow-x:auto;">
+      <table id="payroll-table" style="width:100%;border-collapse:collapse;font-size:.82rem;">
+        <thead>
+          <tr style="background:var(--card-bg);border-bottom:2px solid var(--border);">
+            <th style="padding:.6rem .75rem;text-align:left;white-space:nowrap;">#</th>
+            <th style="padding:.6rem .75rem;text-align:left;white-space:nowrap;">Pay Period</th>
+            <th style="padding:.6rem .75rem;text-align:left;white-space:nowrap;">Submission Deadline</th>
+            <th style="padding:.6rem .75rem;text-align:left;white-space:nowrap;">Pay Date</th>
+            <th style="padding:.6rem .75rem;text-align:center;white-space:nowrap;">Flags</th>
+          </tr>
+        </thead>
+        <tbody id="payroll-body"></tbody>
+      </table>
+    </div>
+    <p style="font-size:.75rem;color:var(--text-light);margin-top:.75rem;">* Submission deadline is 2 days before pay date. M = First period of month · Q = First of quarter · Y = First of year.</p>
+  </div>
+</div>
+
 </div><!-- /appContent -->
 
 <script>
@@ -877,6 +930,7 @@ function switchTab(id){
   document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
   document.getElementById('sec-'+id).classList.add('active');
   event.target.classList.add('active');
+  if(id==='payroll'){renderPayrollBanner();renderPayrollTable();}
 }
 function switchTabDirect(id){
   document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
@@ -1294,6 +1348,158 @@ function filterChangeLog(){
 }
 
 filterChangeLog();
+
+// ===== PAYROLL SCHEDULE =====
+var payrollData = [
+  // 2026
+  {num:4,  process:"2026-02-11",payDate:"2026-02-13",begin:"2026-01-26",end:"2026-02-08", om:1,flags:"MY"},
+  {num:5,  process:"2026-02-25",payDate:"2026-02-27",begin:"2026-02-09",end:"2026-02-22", om:2,flags:"MY"},
+  {num:6,  process:"2026-03-11",payDate:"2026-03-13",begin:"2026-02-23",end:"2026-03-08", om:1,flags:"MY"},
+  {num:7,  process:"2026-03-25",payDate:"2026-03-27",begin:"2026-03-09",end:"2026-03-22", om:2,flags:"MQY"},
+  {num:8,  process:"2026-04-08",payDate:"2026-04-10",begin:"2026-03-23",end:"2026-04-05", om:1,flags:"MQY"},
+  {num:9,  process:"2026-04-22",payDate:"2026-04-24",begin:"2026-04-06",end:"2026-04-19", om:2,flags:"MY"},
+  {num:10, process:"2026-05-06",payDate:"2026-05-08",begin:"2026-04-20",end:"2026-05-03", om:1,flags:"MY"},
+  {num:11, process:"2026-05-20",payDate:"2026-05-22",begin:"2026-05-04",end:"2026-05-17", om:2,flags:"MY"},
+  {num:12, process:"2026-06-03",payDate:"2026-06-05",begin:"2026-05-18",end:"2026-05-31", om:1,flags:"MY"},
+  {num:13, process:"2026-06-16",payDate:"2026-06-18",begin:"2026-06-01",end:"2026-06-14", om:2,flags:"MQY"},
+  {num:14, process:"2026-07-01",payDate:"2026-07-03",begin:"2026-06-15",end:"2026-06-28", om:1,flags:"MQY"},
+  {num:15, process:"2026-07-15",payDate:"2026-07-17",begin:"2026-06-29",end:"2026-07-12", om:2,flags:"Y"},
+  {num:16, process:"2026-07-29",payDate:"2026-07-31",begin:"2026-07-13",end:"2026-07-26", om:3,flags:"MY"},
+  {num:17, process:"2026-08-12",payDate:"2026-08-14",begin:"2026-07-27",end:"2026-08-09", om:1,flags:"MY"},
+  {num:18, process:"2026-08-26",payDate:"2026-08-28",begin:"2026-08-10",end:"2026-08-23", om:2,flags:"MY"},
+  {num:19, process:"2026-09-09",payDate:"2026-09-11",begin:"2026-08-24",end:"2026-09-06", om:1,flags:"MY"},
+  {num:20, process:"2026-09-23",payDate:"2026-09-25",begin:"2026-09-07",end:"2026-09-20", om:2,flags:"MQY"},
+  {num:21, process:"2026-10-07",payDate:"2026-10-09",begin:"2026-09-21",end:"2026-10-04", om:1,flags:"MQY"},
+  {num:22, process:"2026-10-21",payDate:"2026-10-23",begin:"2026-10-05",end:"2026-10-18", om:2,flags:"MY"},
+  {num:23, process:"2026-11-04",payDate:"2026-11-06",begin:"2026-10-19",end:"2026-11-01", om:1,flags:"MY"},
+  {num:24, process:"2026-11-18",payDate:"2026-11-20",begin:"2026-11-02",end:"2026-11-15", om:2,flags:"MY"},
+  {num:25, process:"2026-12-02",payDate:"2026-12-04",begin:"2026-11-16",end:"2026-11-29", om:1,flags:"MY"},
+  {num:26, process:"2026-12-16",payDate:"2026-12-18",begin:"2026-11-30",end:"2026-12-13", om:2,flags:"Y"},
+  {num:27, process:"2026-12-29",payDate:"2026-12-31",begin:"2026-12-14",end:"2026-12-27", om:3,flags:"MQYY"},
+  // 2027
+  {num:1,  process:"2027-01-13",payDate:"2027-01-15",begin:"2026-12-28",end:"2027-01-10", om:1,flags:"MQYY"},
+  {num:2,  process:"2027-01-27",payDate:"2027-01-29",begin:"2027-01-11",end:"2027-01-24", om:2,flags:"MY"},
+  {num:3,  process:"2027-02-10",payDate:"2027-02-12",begin:"2027-01-25",end:"2027-02-07", om:1,flags:"MY"},
+  {num:4,  process:"2027-02-24",payDate:"2027-02-26",begin:"2027-02-08",end:"2027-02-21", om:2,flags:"MY"},
+  {num:5,  process:"2027-03-10",payDate:"2027-03-12",begin:"2027-02-22",end:"2027-03-07", om:1,flags:"MY"},
+  {num:6,  process:"2027-03-24",payDate:"2027-03-26",begin:"2027-03-08",end:"2027-03-21", om:2,flags:"MQY"},
+  {num:7,  process:"2027-04-07",payDate:"2027-04-09",begin:"2027-03-22",end:"2027-04-04", om:1,flags:"MQY"},
+  {num:8,  process:"2027-04-21",payDate:"2027-04-23",begin:"2027-04-05",end:"2027-04-18", om:2,flags:"MY"},
+  {num:9,  process:"2027-05-05",payDate:"2027-05-07",begin:"2027-04-19",end:"2027-05-02", om:1,flags:"MY"},
+  {num:10, process:"2027-05-19",payDate:"2027-05-21",begin:"2027-05-03",end:"2027-05-16", om:2,flags:"MY"},
+  {num:11, process:"2027-06-02",payDate:"2027-06-04",begin:"2027-05-17",end:"2027-05-30", om:1,flags:"MY"},
+  {num:12, process:"2027-06-16",payDate:"2027-06-18",begin:"2027-05-31",end:"2027-06-13", om:2,flags:"MQY"},
+  {num:13, process:"2027-06-30",payDate:"2027-07-02",begin:"2027-06-14",end:"2027-06-27", om:1,flags:"MQY"},
+  {num:14, process:"2027-07-14",payDate:"2027-07-16",begin:"2027-06-28",end:"2027-07-11", om:2,flags:"Y"},
+  {num:15, process:"2027-07-28",payDate:"2027-07-30",begin:"2027-07-12",end:"2027-07-25", om:3,flags:"MY"},
+  {num:16, process:"2027-08-11",payDate:"2027-08-13",begin:"2027-07-26",end:"2027-08-08", om:1,flags:"MY"},
+  {num:17, process:"2027-08-25",payDate:"2027-08-27",begin:"2027-08-09",end:"2027-08-22", om:2,flags:"MY"},
+  {num:18, process:"2027-09-08",payDate:"2027-09-10",begin:"2027-08-23",end:"2027-09-05", om:1,flags:"MY"},
+  {num:19, process:"2027-09-22",payDate:"2027-09-24",begin:"2027-09-06",end:"2027-09-19", om:2,flags:"MQY"},
+  {num:20, process:"2027-10-06",payDate:"2027-10-08",begin:"2027-09-20",end:"2027-10-03", om:1,flags:"MQY"},
+  {num:21, process:"2027-10-20",payDate:"2027-10-22",begin:"2027-10-04",end:"2027-10-17", om:2,flags:"MY"},
+  {num:22, process:"2027-11-03",payDate:"2027-11-05",begin:"2027-10-18",end:"2027-10-31", om:1,flags:"MY"},
+  {num:23, process:"2027-11-17",payDate:"2027-11-19",begin:"2027-11-01",end:"2027-11-14", om:2,flags:"MY"},
+  {num:24, process:"2027-12-01",payDate:"2027-12-03",begin:"2027-11-15",end:"2027-11-28", om:1,flags:"MY"},
+  {num:25, process:"2027-12-15",payDate:"2027-12-17",begin:"2027-11-29",end:"2027-12-12", om:2,flags:"Y"},
+  {num:26, process:"2027-12-29",payDate:"2027-12-31",begin:"2027-12-13",end:"2027-12-26", om:3,flags:"MQY"}
+];
+
+var payrollYearFilter = 'all';
+
+function fmtPayDate(d) {
+  var dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+function fmtShort(d) {
+  var dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
+function renderPayrollBanner() {
+  var today = new Date(); today.setHours(0,0,0,0);
+  var next = null, current = null;
+  for (var i=0; i<payrollData.length; i++) {
+    var pd = new Date(payrollData[i].payDate + 'T00:00:00');
+    var pb = new Date(payrollData[i].begin + 'T00:00:00');
+    var pe = new Date(payrollData[i].end + 'T00:00:00');
+    pe.setHours(23,59,59);
+    if (!current && today >= pb && today <= pe) current = payrollData[i];
+    if (!next && pd >= today) next = payrollData[i];
+  }
+  if (next) {
+    document.getElementById('payroll-next-date').textContent = fmtPayDate(next.payDate);
+    document.getElementById('payroll-submit-deadline').textContent = fmtPayDate(next.process) + ' (submit)';
+    var daysAway = Math.ceil((new Date(next.payDate + 'T00:00:00') - today) / 86400000);
+    document.getElementById('payroll-days-away').textContent = daysAway === 0 ? 'Today!' : daysAway + ' day' + (daysAway===1?'':'s');
+  }
+  if (current) {
+    document.getElementById('payroll-current-period').textContent = fmtShort(current.begin) + ' – ' + fmtShort(current.end);
+  } else if (next) {
+    document.getElementById('payroll-current-period').textContent = fmtShort(next.begin) + ' – ' + fmtShort(next.end);
+  }
+}
+
+function filterPayrollYear(yr) {
+  payrollYearFilter = yr;
+  document.querySelectorAll('.pyr-btn').forEach(function(b){
+    var isActive = b.id === 'pyr-' + yr;
+    b.style.background = isActive ? 'var(--accent)' : 'transparent';
+    b.style.color = isActive ? '#fff' : 'var(--text)';
+    b.style.borderColor = isActive ? 'var(--accent)' : 'var(--border)';
+  });
+  renderPayrollTable();
+}
+
+function renderPayrollTable() {
+  var today = new Date(); today.setHours(0,0,0,0);
+  var body = document.getElementById('payroll-body');
+  body.innerHTML = '';
+  var lastYear = '';
+  payrollData.forEach(function(p) {
+    var yr = p.payDate.substring(0,4);
+    if (payrollYearFilter !== 'all' && yr !== payrollYearFilter) return;
+
+    // Year divider row
+    if (yr !== lastYear) {
+      var yrRow = '<tr><td colspan="5" style="background:var(--border);color:var(--text-light);font-size:.75rem;font-weight:700;padding:.35rem .75rem;letter-spacing:.08em;">'+ yr +' PAYROLL</td></tr>';
+      body.innerHTML += yrRow;
+      lastYear = yr;
+    }
+
+    var pd = new Date(p.payDate + 'T00:00:00');
+    var pb = new Date(p.begin + 'T00:00:00');
+    var pe = new Date(p.end + 'T00:00:00'); pe.setHours(23,59,59);
+    var isCurrent = today >= pb && today <= pe;
+    var isNext = !isCurrent && pd >= today && pd - today < 14*86400000;
+    var isPast = pd < today;
+
+    var rowStyle = '';
+    if (isCurrent) rowStyle = 'background:rgba(13,148,136,.12);border-left:3px solid #0d9488;';
+    else if (isNext) rowStyle = 'background:rgba(13,148,136,.05);border-left:3px solid rgba(13,148,136,.4);';
+    else if (isPast) rowStyle = 'opacity:.55;';
+
+    var flags = '';
+    if (p.flags.indexOf('M')>=0) flags += '<span style="font-size:.7em;padding:.1em .4em;background:#dbeafe;color:#1d4ed8;border-radius:4px;margin-right:.25em;">M</span>';
+    if (p.flags.indexOf('Q')>=0) flags += '<span style="font-size:.7em;padding:.1em .4em;background:#fef3c7;color:#92400e;border-radius:4px;margin-right:.25em;">Q</span>';
+    if (p.flags.split('Y').length-1 >= 2) flags += '<span style="font-size:.7em;padding:.1em .4em;background:#fce7f3;color:#9d174d;border-radius:4px;">FY</span>';
+    else if (p.flags.indexOf('Y')>=0) flags += '<span style="font-size:.7em;padding:.1em .4em;background:#dcfce7;color:#166534;border-radius:4px;">Y</span>';
+
+    var label = isCurrent ? ' <span style="font-size:.7em;background:#0d9488;color:#fff;padding:.1em .45em;border-radius:4px;vertical-align:middle;">CURRENT</span>' : (isNext ? ' <span style="font-size:.7em;background:rgba(13,148,136,.7);color:#fff;padding:.1em .45em;border-radius:4px;vertical-align:middle;">NEXT</span>' : '');
+
+    body.innerHTML += '<tr style="border-bottom:1px solid var(--border);' + rowStyle + '">'
+      + '<td style="padding:.55rem .75rem;color:var(--text-light);font-weight:600;">' + p.num + '</td>'
+      + '<td style="padding:.55rem .75rem;white-space:nowrap;">' + fmtShort(p.begin) + ' – ' + fmtShort(p.end) + label + '</td>'
+      + '<td style="padding:.55rem .75rem;white-space:nowrap;">' + fmtPayDate(p.process) + '</td>'
+      + '<td style="padding:.55rem .75rem;white-space:nowrap;font-weight:700;color:var(--accent);">' + fmtPayDate(p.payDate) + '</td>'
+      + '<td style="padding:.55rem .75rem;text-align:center;">' + flags + '</td>'
+      + '</tr>';
+  });
+}
+
+// Init payroll tab when switched to
+var _origSwitchTab = typeof switchTab === 'function' ? switchTab : null;
+
 </script>
 </body>
 </html>
