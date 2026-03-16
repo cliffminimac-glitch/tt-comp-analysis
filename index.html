@@ -690,9 +690,9 @@ function renderPayrollTable() {
     var yr = p.payDate.substring(0,4);
     if (payrollYearFilter !== 'all' && yr !== payrollYearFilter) return;
 
-    // Year divider row
+    // Year divider row (compact — show year inline with first row of each year)
     if (yr !== lastYear) {
-      var yrRow = '<tr><td colspan="5" style="background:var(--border);color:var(--text-light);font-size:.75rem;font-weight:700;padding:.35rem .75rem;letter-spacing:.08em;">'+ yr +' PAYROLL</td></tr>';
+      var yrRow = '<tr><td colspan="6" style="background:var(--border);color:var(--text-light);font-size:.72rem;font-weight:700;padding:.3rem .75rem;letter-spacing:.07em;">'+ yr +'</td></tr>';
       body.innerHTML += yrRow;
       lastYear = yr;
     }
@@ -722,7 +722,7 @@ function renderPayrollTable() {
       + '<td style="padding:.55rem .75rem;white-space:nowrap;">' + fmtShort(p.begin) + ' – ' + fmtShort(p.end) + label + '</td>'
       + '<td style="padding:.55rem .75rem;white-space:nowrap;">' + fmtPayDate(p.process) + '</td>'
       + '<td style="padding:.55rem .75rem;white-space:nowrap;font-weight:700;color:var(--accent);">' + fmtPayDate(p.payDate) + '</td>'
-      + '<td style="padding:.55rem .75rem;text-align:right;font-variant-numeric:tabular-nums;">' + (p.totalPayroll ? '<span style="color:var(--accent);font-weight:600;">$'+p.totalPayroll.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'</span>' : p.forecastedPayroll ? '<span style="color:var(--text-light);font-style:italic;font-size:.9em;" title="'+(p.forecastNote||'Forecasted based on recent actuals')+'">~$'+p.forecastedPayroll.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'</span>' : '<span style="color:var(--text-light);font-size:.75em;">—</span>') + '</td>'
+      + '<td style="padding:.55rem .75rem;text-align:right;font-variant-numeric:tabular-nums;">' + (p.totalFunding ? '<span style="color:var(--accent);font-weight:600;">$'+p.totalFunding.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'</span>' : p.forecastedFunding ? '<span style="color:var(--text-light);font-style:italic;font-size:.9em;" title="'+(p.forecastNote||'Estimated; based on recent actuals × 1.5% billing')+'">~$'+p.forecastedFunding.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'</span>' : '<span style="color:var(--text-light);font-size:.75em;">—</span>') + '</td>'
       + '<td style="padding:.55rem .75rem;text-align:center;">' + flags + '</td>'
       + '</tr>';
   });
