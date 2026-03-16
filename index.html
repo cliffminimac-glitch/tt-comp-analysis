@@ -79,7 +79,8 @@ th { background:var(--bg); font-weight:700; font-size:.75rem; text-transform:upp
       data-client_id="1010698547754-h3pfeegsn3tkemksjjtjlcgccoqtqbt6.apps.googleusercontent.com"
       data-callback="handleCompLogin"
       data-auto_prompt="false">
-    </div>
+    
+<div id="loginLoading" style="display:none;color:#999;font-size:13px;margin-top:8px;">Loading secure data...</div></div>
     <div class="g_id_signin"
       data-type="standard"
       data-shape="rectangular"
@@ -124,790 +125,83 @@ th { background:var(--bg); font-weight:700; font-size:.75rem; text-transform:upp
 </div>
 
 <!-- HOME -->
-<div class="section active" id="sec-home">
-  <div class="card">
-    <h2>Welcome to Compensation Analysis & Promotion Planning</h2>
-    <p style="font-size:.88rem;color:var(--text);line-height:1.8;margin-bottom:1rem;">This dashboard provides a comprehensive view of Tiger Tracks' compensation structure, employee history, and promotion pipeline. Use the tabs above to navigate.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.25rem;">
-      <div style="background:var(--bg);border-radius:10px;padding:1rem;cursor:pointer;" onclick="switchTabDirect('table')">
-        <div style="font-size:1.1rem;margin-bottom:.25rem;">👥</div>
-        <strong style="font-size:.88rem;">Team Roster</strong>
-        <p style="font-size:.78rem;color:var(--text-light);margin-top:.25rem;">Full sortable table of all 25 employees with roles, salaries, and band positions.</p>
-      </div>
-      <div style="background:var(--bg);border-radius:10px;padding:1rem;cursor:pointer;" onclick="switchTabDirect('changelog')">
-        <div style="font-size:1.1rem;margin-bottom:.25rem;">📝</div>
-        <strong style="font-size:.88rem;">Change Log</strong>
-        <p style="font-size:.78rem;color:var(--text-light);margin-top:.25rem;">42 compensation and title changes across 25 employees from hire date through Feb 2026.</p>
-      </div>
-      <div style="background:var(--bg);border-radius:10px;padding:1rem;cursor:pointer;" onclick="switchTabDirect('promoactions')">
-        <div style="font-size:1.1rem;margin-bottom:.25rem;">🏆</div>
-        <strong style="font-size:.88rem;">Promotions</strong>
-        <p style="font-size:.78rem;color:var(--text-light);margin-top:.25rem;">Active promotion pipeline with approved and upcoming promotions with achievement profiles.</p>
-      </div>
-      <div style="background:var(--bg);border-radius:10px;padding:1rem;cursor:pointer;" onclick="switchTabDirect('hiring')">
-        <div style="font-size:1.1rem;margin-bottom:.25rem;">🔍</div>
-        <strong style="font-size:.88rem;">Hiring Forecast</strong>
-        <p style="font-size:.78rem;color:var(--text-light);margin-top:.25rem;">6-7 planned hires including Director of Partnerships, Director of Marketing, and more.</p>
-      </div>
-      <div style="background:var(--bg);border-radius:10px;padding:1rem;cursor:pointer;" onclick="switchTabDirect('performance')">
-        <div style="font-size:1.1rem;margin-bottom:.25rem;">⚠️</div>
-        <strong style="font-size:.88rem;">Performance Actions</strong>
-        <p style="font-size:.78rem;color:var(--text-light);margin-top:.25rem;">Team members not in good standing with documented issues and incident logs.</p>
-      </div>
-      <div style="background:var(--bg);border-radius:10px;padding:1rem;cursor:pointer;" onclick="switchTabDirect('overview')">
-        <div style="font-size:1.1rem;margin-bottom:.25rem;">📊</div>
-        <strong style="font-size:.88rem;">Band Overview</strong>
-        <p style="font-size:.78rem;color:var(--text-light);margin-top:.25rem;">Salary bands vs market rates, employee positions within bands, and band position analysis.</p>
-      </div>
-      <div style="background:var(--bg);border-radius:10px;padding:1rem;cursor:pointer;" onclick="switchTabDirect('q2q4')">
-        <div style="font-size:1.1rem;margin-bottom:.25rem;">📈</div>
-        <strong style="font-size:.88rem;">Q2-Q4 Planning</strong>
-        <p style="font-size:.78rem;color:var(--text-light);margin-top:.25rem;">Promotion scenarios, cost projections, and 3-phase market alignment plan ($65-73K Year 1).</p>
-      </div>
-    </div>
-    <div style="border-top:1px solid var(--border);padding-top:1rem;">
-      <h3 style="font-size:.9rem;margin-bottom:.5rem;">Quick Stats</h3>
-      <div style="display:flex;gap:2rem;flex-wrap:wrap;font-size:.85rem;">
-        <div><strong style="color:var(--accent);">25</strong> employees</div>
-        <div><strong style="color:var(--accent);">$2.84M</strong> total payroll</div>
-        <div><strong style="color:var(--accent);">$114K</strong> avg salary</div>
-        <div><strong style="color:var(--accent);">42</strong> changes logged</div>
-        <div><strong style="color:var(--accent);">1</strong> approved promotion</div>
-        <div><strong style="color:var(--accent);">1</strong> pending promotion</div>
-        <div><strong style="color:var(--accent);">$65-73K</strong> est. Year 1 investment</div>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="appContent" style="display:none"></div>
+<!-- /appContent -->
 
-<!-- HIRING FORECAST -->
-<div class="section" id="sec-hiring">
-  <div class="card">
-    <h2>🔍 Hiring Forecast</h2>
-    <p style="font-size:.85rem;color:var(--text-light);margin-bottom:1.25rem;">Open and planned positions for Q1-Q2 2026. Salary ranges based on current Tiger Tracks bands and market benchmarks.</p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;">
-
-      <!-- Director of Partnerships -->
-      <div style="border:1px solid var(--border);border-radius:12px;padding:1.25rem;background:#fff;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;">
-          <div>
-            <h4 style="font-size:.92rem;margin-bottom:.15rem;">Director of Partnerships</h4>
-            <span style="font-size:.78rem;color:var(--text-light);">Growth Team</span>
-          </div>
-          <span class="badge" style="background:#fef3c7;color:#d97706;font-weight:700;">High Priority</span>
-        </div>
-        <div style="font-size:.82rem;line-height:1.7;">
-          <p><strong>Replaces:</strong> Head of Partnerships + Director of Partnerships (2 roles consolidated into 1)</p>
-          <p><strong>Band:</strong> $100,000 - $175,000</p>
-          <p><strong>Headcount:</strong> 1</p>
-          <p style="margin-top:.35rem;color:var(--text-light);">Full-cycle partnerships leader. Must be NYC-commutable with marketing/advertising agency background. Owns BD pipeline, client acquisition strategy, and partner relationships.</p>
-        </div>
-      </div>
-
-      <!-- Director of Marketing -->
-      <div style="border:1px solid var(--border);border-radius:12px;padding:1.25rem;background:#fff;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;">
-          <div>
-            <h4 style="font-size:.92rem;margin-bottom:.15rem;">Director of Marketing</h4>
-            <span style="font-size:.78rem;color:var(--text-light);">Growth Team</span>
-          </div>
-          <span class="badge" style="background:#fef3c7;color:#d97706;font-weight:700;">High Priority</span>
-        </div>
-        <div style="font-size:.82rem;line-height:1.7;">
-          <p><strong>Band:</strong> $100,000 - $155,000</p>
-          <p><strong>Headcount:</strong> 1</p>
-          <p style="margin-top:.35rem;color:var(--text-light);">Owns inbound marketing engine: organic content, writing, design, creative strategy. Must have real agency experience (~5 years) and proven track record building content programs.</p>
-        </div>
-      </div>
-
-      <!-- Senior Account Manager -->
-      <div style="border:1px solid var(--border);border-radius:12px;padding:1.25rem;background:#fff;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;">
-          <div>
-            <h4 style="font-size:.92rem;margin-bottom:.15rem;">Senior Account Manager</h4>
-            <span style="font-size:.78rem;color:var(--text-light);">Operations Team</span>
-          </div>
-          <span class="badge" style="background:#dbeafe;color:#2563eb;font-weight:700;">Open</span>
-        </div>
-        <div style="font-size:.82rem;line-height:1.7;">
-          <p><strong>Band:</strong> $122,000 - $140,000</p>
-          <p><strong>Headcount:</strong> 1</p>
-          <p style="margin-top:.35rem;color:var(--text-light);">Experienced performance marketing manager to handle growing client book. Must manage $27K+ in monthly revenue across multiple accounts.</p>
-        </div>
-      </div>
-
-      <!-- Account Coordinators -->
-      <div style="border:1px solid var(--border);border-radius:12px;padding:1.25rem;background:#fff;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;">
-          <div>
-            <h4 style="font-size:.92rem;margin-bottom:.15rem;">Account Coordinator(s)</h4>
-            <span style="font-size:.78rem;color:var(--text-light);">Operations Team</span>
-          </div>
-          <span class="badge" style="background:#dbeafe;color:#2563eb;font-weight:700;">Open</span>
-        </div>
-        <div style="font-size:.82rem;line-height:1.7;">
-          <p><strong>Band:</strong> $60,000 - $75,000</p>
-          <p><strong>Headcount:</strong> 1-2</p>
-          <p style="margin-top:.35rem;color:var(--text-light);">Entry-level support for account teams. Campaign setup, reporting, QA, and client communication under AM/SrAM supervision.</p>
-        </div>
-      </div>
-
-      <!-- Referral Partner -->
-      <div style="border:1px solid var(--border);border-radius:12px;padding:1.25rem;background:#fff;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;">
-          <div>
-            <h4 style="font-size:.92rem;margin-bottom:.15rem;">Referral Partner</h4>
-            <span style="font-size:.78rem;color:var(--text-light);">Growth Team</span>
-          </div>
-          <span class="badge" style="background:#dcfce7;color:#059669;font-weight:700;">Pipeline</span>
-        </div>
-        <div style="font-size:.82rem;line-height:1.7;">
-          <p><strong>Compensation:</strong> Commission-based (no salary band)</p>
-          <p><strong>Headcount:</strong> 1+</p>
-          <p style="margin-top:.35rem;color:var(--text-light);">External referral partner to drive warm introductions and qualified leads. Commission on closed deals.</p>
-        </div>
-      </div>
-
-      <!-- Executive Assistant -->
-      <div style="border:1px solid var(--border);border-radius:12px;padding:1.25rem;background:#fff;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;">
-          <div>
-            <h4 style="font-size:.92rem;margin-bottom:.15rem;">Executive Assistant</h4>
-            <span style="font-size:.78rem;color:var(--text-light);">For Cliff</span>
-          </div>
-          <span class="badge" style="background:#dbeafe;color:#2563eb;font-weight:700;">Open</span>
-        </div>
-        <div style="font-size:.82rem;line-height:1.7;">
-          <p><strong>Band:</strong> $55,000 - $75,000</p>
-          <p><strong>Headcount:</strong> 1</p>
-          <p style="margin-top:.35rem;color:var(--text-light);">Calendar management, travel coordination, meeting prep, and administrative support for Cliff.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="border-top:1px solid var(--border);margin-top:1.25rem;padding-top:1rem;">
-      <h3 style="font-size:.9rem;margin-bottom:.5rem;">Forecast Summary</h3>
-      <div style="display:flex;gap:2rem;flex-wrap:wrap;font-size:.85rem;">
-        <div><strong style="color:var(--accent);">6-7</strong> new hires planned</div>
-        <div><strong style="color:var(--accent);">2</strong> high priority (Dir of Partnerships, Dir of Marketing)</div>
-        <div><strong style="color:var(--accent);">$537K - $795K</strong> est. new payroll (excl. referral partner)</div>
-        <div><strong style="color:var(--accent);">30-32</strong> projected team size</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- BAND OVERVIEW -->
-<div class="section" id="sec-overview">
-  <div class="card">
-    <h2>Salary Bands: TT Current vs Market (2026)</h2>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:.5rem;">Tiger Tracks bands (dark) overlaid with market ranges (light). Sources: PayScale, BuiltIn, agency benchmarks.</p>
-    <div class="chart-wrap"><canvas id="chartBands"></canvas></div>
-  </div>
-  <div class="card">
-    <h2>Where Each Employee Sits in Their Band</h2>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:.5rem;">Dots show current salary position within the Tiger Tracks salary band for their role.</p>
-    <div class="chart-wrap-tall"><canvas id="chartPeople"></canvas></div>
-  </div>
-  <div class="card">
-    <h2>📍 Band Position Analysis</h2>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:.75rem;">How far through their band each employee is. Those near 100% are at cap; those below 50% have room to grow within the current role.</p>
-    <div class="chart-wrap-tall"><canvas id="chartBandPct"></canvas></div>
-  </div>
-</div>
-
-<!-- POSITION IN BAND (now inside overview visually, rendered when overview is active) -->
-
-
-<!-- TABLE -->
-<div class="section" id="sec-table">
-  <div class="card">
-    <h2>📋 Full Compensation Table</h2>
-    <div style="display:flex;gap:.75rem;margin-bottom:.75rem;flex-wrap:wrap;align-items:center;">
-      <label style="font-size:.82rem;font-weight:600;margin:0;">Sort by:</label>
-      <select id="tableSortBy" onchange="renderCompTable()" style="max-width:200px;">
-        <option value="role">Role (then name)</option>
-        <option value="name">Name (A-Z)</option>
-        <option value="salary-desc">Salary (high to low)</option>
-        <option value="salary-asc">Salary (low to high)</option>
-        <option value="band-pct">Band % (highest first)</option>
-        <option value="raise">Raise Needed (highest first)</option>
-      </select>
-    </div>
-    <div style="overflow-x:auto;">
-      <table id="compTable">
-        <thead>
-          <tr>
-            <th style="cursor:pointer;" onclick="sortTable('name')">Employee ⇅</th>
-            <th style="cursor:pointer;" onclick="sortTable('role')">Current Role ⇅</th>
-            <th style="cursor:pointer;" onclick="sortTable('salary-desc')">Current Salary ⇅</th>
-            <th>Band Low</th><th>Band High</th>
-            <th style="cursor:pointer;" onclick="sortTable('band-pct')">Band % ⇅</th>
-            <th>Market Avg</th><th>vs Market</th><th>Next Role</th><th>Promo Target</th>
-            <th style="cursor:pointer;" onclick="sortTable('raise')">Raise Needed ⇅</th>
-          </tr>
-        </thead>
-        <tbody id="compBody"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- Q2-Q4 PLANNING -->
-<div class="section" id="sec-q2q4">
-  <div class="card">
-    <h2>🚀 Hypothetical Promotion Scenarios</h2>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:1rem;">Based on current salary, band position, and the next role's band, here are recommended promotion amounts. Promotions target the 25th-40th percentile of the next band to leave growth room.</p>
-    <div id="promoCards"></div>
-  </div>
-  <div class="card">
-    <h2>📊 Promotion Cost Summary</h2>
-    <div class="chart-wrap"><canvas id="chartPromoCost"></canvas></div>
-  </div>
-  <div class="card">
-    <h2>📈 Market Alignment Plan: Getting Tiger Tracks Salaries Closer to Market</h2>
-    <p style="font-size:.85rem;color:var(--text-light);margin-bottom:1rem;">A phased approach to align compensation with market rates while managing budget impact.</p>
-  </div>
-
-  <div class="card">
-    <h2>Current State Assessment</h2>
-    <div style="font-size:.85rem;line-height:1.8;">
-      <p><strong>Total payroll:</strong> ~$2.84M ($2,844,750) across 25 employees</p>
-      <p><strong>Overall positioning:</strong> Tiger Tracks pays <strong>above market</strong> at most levels. The company is competitive or premium at AC, AS, AM, and SrAM tiers. Leadership roles (AD, DCS, SrDCS) are at market.</p>
-      <p style="margin-top:.75rem;"><strong>Key gaps to address:</strong></p>
-      <ul style="padding-left:1.25rem;margin:.5rem 0;">
-        <li><strong>Gretchen Hess (AM at $117K)</strong> consistently exceeds Sr AM minimum revenue thresholds. Up for promotion to Senior Account Manager.</li>
-        <li><strong>Megan Brenneke (AC at $75K)</strong> materially outperforms all ACs/ASs and many AMs. Approved for promotion to Account Strategist effective March 9.</li>
-        <li><strong>Billy Bevevino (AS at $85K)</strong> and <strong>Owen Phipps (AS at $85K)</strong> are both at the AS band floor with room for performance-based increases.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Phase 1: Immediate Promotions (Q1 2026)</h2>
-    <div style="font-size:.85rem;line-height:1.8;">
-      <p style="margin-bottom:.5rem;"><strong>Priority:</strong> Promote high performers who have clearly exceeded their current role requirements.</p>
-      <table>
-        <tr><th>Employee</th><th>Current Role</th><th>New Role</th><th>Current Salary</th><th>New Salary</th><th>Cost</th><th>Rationale</th></tr>
-        <tr><td><strong>Megan Brenneke</strong></td><td>Account Coordinator</td><td>Account Strategist</td><td>$75,000</td><td>$85,000</td><td>+$10,000</td><td>Exceeds AM revenue thresholds; primary on 7 accounts; approved effective March 9</td></tr>
-        <tr><td><strong>Gretchen Hess</strong></td><td>Account Manager</td><td>Senior Account Manager</td><td>$117,000</td><td>$122,000 - $130,000</td><td>+$5,000 - $13,000</td><td>Consistently exceeds SrAM revenue minimums; leads strategy on Tier 1 client; strong BD contributions</td></tr>
-      </table>
-      <p style="margin-top:.75rem;"><strong>Phase 1 budget:</strong> ~$15,000 - $23,000/year</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Phase 2: Performance-Based Band Positioning (Q2 2026)</h2>
-    <div style="font-size:.85rem;line-height:1.8;">
-      <p style="margin-bottom:.5rem;"><strong>Priority:</strong> Move strong performers from the bottom third to the middle third of their band. Tie raises to Q1 performance reviews.</p>
-      <table>
-        <tr><th>Employee</th><th>Current</th><th>Band Position</th><th>Target</th><th>Cost</th></tr>
-        <tr><td><strong>Billy Bevevino</strong></td><td>$85,000</td><td>0% (floor)</td><td>$88,000</td><td>+$3,000</td></tr>
-        <tr><td><strong>Owen Phipps</strong></td><td>$85,000</td><td>0% (floor)</td><td>$88,000</td><td>+$3,000</td></tr>
-      </table>
-      <p style="margin-top:.75rem;"><strong>Phase 2 budget:</strong> ~$6,000/year</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Phase 3: Promotion Pipeline Funding (Q3-Q4 2026)</h2>
-    <div style="font-size:.85rem;line-height:1.8;">
-      <p style="margin-bottom:.5rem;"><strong>Priority:</strong> Fund promotions for employees who are at or near cap in their current band and ready for the next level.</p>
-      <table>
-        <tr><th>Employee</th><th>Current</th><th>Band %</th><th>Next Role</th><th>Promo Target</th><th>Cost</th></tr>
-        <tr><td><strong>Megan Brenneke</strong></td><td>$85,000 <em style="font-size:.8em;color:#059669;">(post-Phase-1)</em></td><td>0% (AS)</td><td>Account Strategist</td><td>$88,000</td><td>+$3,000</td></tr>
-        <tr><td><strong>Tate Dewey</strong></td><td>$95,000</td><td>100% (AS)</td><td>Account Manager</td><td>$107,000</td><td>+$12,000</td></tr>
-        <tr><td><strong>Seth McDaniel</strong></td><td>$95,000</td><td>100% (AS)</td><td>Account Manager</td><td>$107,000</td><td>+$12,000</td></tr>
-        <tr><td><strong>Daren Kalkoffen</strong></td><td>$90,000</td><td>50% (AS)</td><td>Account Manager</td><td>$107,000</td><td>+$17,000</td></tr>
-      </table>
-      <p style="margin-top:.75rem;"><strong>Phase 3 budget:</strong> ~$44,000/year</p>
-      <p><em>Note: Promotions should be merit-based, not automatic. These are budget placeholders for high-performers who demonstrate readiness.</em></p>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Ongoing: Annual Comp Review Framework</h2>
-    <div style="font-size:.85rem;line-height:1.8;">
-      <ul style="padding-left:1.25rem;">
-        <li><strong>Q1 each year:</strong> Market data refresh (PayScale, BuiltIn, agency salary surveys). Update bands if market has shifted.</li>
-        <li><strong>Q1 each year:</strong> Performance reviews drive band positioning. High performers move up within band; low performers stay or are managed out.</li>
-        <li><strong>Budget 3-5% of payroll annually for merit increases</strong> (~$90K-$150K at current headcount). This keeps pace with market inflation.</li>
-        <li><strong>Promotion budget separate from merit:</strong> Reserve 2-3% of payroll (~$60K-$90K) specifically for promotions.</li>
-        <li><strong>Band compression checks:</strong> Every 6 months, audit for managers earning less than their reports or peers with >15% gaps at the same level.</li>
-        <li><strong>New hire calibration:</strong> Never hire below the 25th percentile of a band. Anchor new hires at 30-50% of band to leave growth room.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Budget Summary</h2>
-    <div class="summary-grid">
-      <div class="summary-stat"><div class="val" style="color:#dc2626;">$15-23K</div><div class="lbl">Phase 1: Promotions (Q1)</div></div>
-      <div class="summary-stat"><div class="val" style="color:#f59e0b;">$6K</div><div class="lbl">Phase 2: Band Positioning (Q2)</div></div>
-      <div class="summary-stat"><div class="val" style="color:#229FA1;">$44K</div><div class="lbl">Phase 3: Promotions (Q3-Q4)</div></div>
-      <div class="summary-stat"><div class="val" style="color:#059669;">$65-73K</div><div class="lbl">Total Year 1 Investment</div></div>
-    </div>
-    <div style="font-size:.85rem;line-height:1.8;">
-      <p><strong>$65-73K total investment</strong> brings the org into proper band alignment and funds the highest-priority promotions. This is ~2.3-2.6% of current payroll, well within industry norms for a correction year.</p>
-      <p style="margin-top:.5rem;">After Year 1, ongoing annual comp investment should be 5-7% of payroll (~$150K-$210K) split between merit increases (3-4%) and promotions (2-3%).</p>
-    </div>
-  </div>
-</div>
-
-<!-- PROMOTIONS -->
-<div class="section" id="sec-promoactions">
-  <div class="card">
-    <h2>🏆 Promotions</h2>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:1.25rem;">Active promotion pipeline for Tiger Tracks team members. Profiles include key achievements and recommended compensation ranges.</p>
-
-    <!-- APPROVED -->
-    <h3 style="font-size:1rem;margin-bottom:.75rem;color:#059669;">✅ Approved Promotions</h3>
-
-    <div style="border:1px solid #dcfce7;border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;background:#f0fdf4;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem;">
-        <div>
-          <h4 style="font-size:.95rem;margin-bottom:.15rem;">Megan Brenneke</h4>
-          <span style="font-size:.82rem;color:var(--text-light);">Account Coordinator → <strong style="color:#059669;">Account Strategist</strong></span>
-        </div>
-        <div style="text-align:right;">
-          <span class="badge" style="background:#dcfce7;color:#059669;font-weight:700;">Effective March 9, 2026</span>
-        </div>
-      </div>
-      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:.75rem;">
-        <div><span style="font-size:.78rem;color:var(--text-light);">Current Salary</span><br><strong>$75,000</strong> <span style="font-size:.78rem;color:var(--text-light);">(AC)</span></div>
-        <div><span style="font-size:.78rem;color:var(--text-light);">New Salary</span><br><strong style="color:var(--accent);">$85,000</strong> <span style="font-size:.78rem;color:var(--text-light);">(AS)</span></div>
-        <div><span style="font-size:.78rem;color:var(--text-light);">Increase</span><br><strong style="color:#059669;">+$10,000 (13.3%)</strong></div>
-        <div><span style="font-size:.78rem;color:var(--text-light);">AS Band</span><br><strong>$85K - $95K</strong></div>
-      </div>
-      <div style="margin-bottom:.5rem;">
-        <strong style="font-size:.82rem;">Key Achievements</strong>
-        <ul style="font-size:.82rem;line-height:1.7;margin:.35rem 0 0 1.25rem;color:var(--text);">
-          <li>Consistently managed over <strong>$23K in revenue/month</strong> for 6+ months (exceeds AM minimum of $22K)</li>
-          <li>Primary on <strong>7 accounts</strong>, supporting <strong>10 total</strong> including Astound (Tier 1)</li>
-          <li>Materially outperforms all current ACs/ASs and many AMs</li>
-          <li>Planned and launched new Brand campaign structure for Lion Brand Yarn: <strong>146% increase in ROAS WoW</strong></li>
-          <li>Launched new Non-Brand structure for Lion Brand Yarn: <strong>33% increase in ROAS MoM</strong></li>
-          <li>Presented 2026 strategy for GMP, resulting in client decision to <strong>match Google Spend for their other brand</strong> (double YoY spend)</li>
-          <li>Identified <strong>4 expansion/upsell opportunities</strong> and supporting 7 more</li>
-          <li>Created apps scripts process to add platforms without SuperMetrics integrations into dynamic reports</li>
-          <li>Facilitated smooth C60 onboarding, building trust that won Bing expansion before launching anything new</li>
-          <li>Developed and maintained Astound reporting dashboards, integral to geo/revenue expansion</li>
-          <li>Recovered difficult relationship with Tamsen Fadal, leading to additional client referrals</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- UP FOR PROMOTION -->
-    <h3 style="font-size:1rem;margin-bottom:.75rem;margin-top:1.5rem;color:#7c3aed;">🔮 Up for Promotion</h3>
-
-    <div style="border:1px solid #ede9fe;border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;background:#faf5ff;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem;">
-        <div>
-          <h4 style="font-size:.95rem;margin-bottom:.15rem;">Gretchen Hess</h4>
-          <span style="font-size:.82rem;color:var(--text-light);">Account Manager → <strong style="color:#7c3aed;">Senior Account Manager</strong></span>
-        </div>
-        <div style="text-align:right;">
-          <span class="badge" style="background:#ede9fe;color:#7c3aed;font-weight:700;">Recommended before retreat</span>
-        </div>
-      </div>
-      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:.75rem;">
-        <div><span style="font-size:.78rem;color:var(--text-light);">Current Salary</span><br><strong>$117,000</strong> <span style="font-size:.78rem;color:var(--text-light);">(AM)</span></div>
-        <div><span style="font-size:.78rem;color:var(--text-light);">Recommended Range</span><br><strong style="color:var(--accent);">$122K - $130K</strong> <span style="font-size:.78rem;color:var(--text-light);">(SrAM)</span></div>
-        <div><span style="font-size:.78rem;color:var(--text-light);">Potential Increase</span><br><strong style="color:#059669;">+$5K - $13K (4.3% - 11.1%)</strong></div>
-        <div><span style="font-size:.78rem;color:var(--text-light);">SrAM Band</span><br><strong>$122K - $140K</strong></div>
-      </div>
-      <div style="margin-bottom:.5rem;">
-        <strong style="font-size:.82rem;">Key Achievements</strong>
-        <ul style="font-size:.82rem;line-height:1.7;margin:.35rem 0 0 1.25rem;color:var(--text);">
-          <li>Consistently exceeds <strong>minimum revenue managed for SrAM ($27K/mo)</strong> while at AM title</li>
-          <li>Managed revenue averaging <strong>over $150K per quarter</strong> in 2025; consistently ranked top three</li>
-          <li>Led ABH partnership during the company's <strong>highest-revenue month to date</strong> (159% MoM increase Oct-Nov)</li>
-          <li>Pitched and won an additional <strong>$80K in incremental spend</strong> for ABH in February</li>
-          <li>Actively pitching expansion: Reddit, Pinterest, StackAdapt, retail media networks, attribution modeling, CRO/GEO</li>
-          <li>Drives strategy and manages client relationships on <strong>Astound (Tier 1 client)</strong>, Tiger Tracks' largest opportunity</li>
-          <li>BD contributions increasingly well-received; prospective clients rave about her slides, content, and communication skills</li>
-          <li>In Acosta pitch, client POC specifically said: <em>"Whoever made this slide, give them a raise. I've never seen this explained so clearly."</em></li>
-          <li>Identified massive expansion opportunities on ABH, proactively and frequently pitching</li>
-          <li>Established strong coaching relationship with Daren, whose performance has improved under her guidance</li>
-          <li>Spearheaded transition from Windsor to SuperMetrics for accurate, sustainable reporting</li>
-          <li>Led reporting strategy for Astound; identified gaps in Meta onboarding training and developed updated materials</li>
-          <li>Successfully delivered BD pitch to prospective client, presenting strategic RMN vision</li>
-        </ul>
-      </div>
-      <div style="font-size:.82rem;margin-top:.5rem;padding:.6rem;background:#fff;border-radius:8px;border:1px solid #e5e7eb;">
-        <strong>Recommendation:</strong> Promote in advance of the company retreat, timing permitting. Gretchen is a joy to be around, extremely smart, strategic, and a supportive team mate.
-      </div>
-    </div>
-  </div>
-
-  </div><!-- end sec-promoactions -->
-
-<!-- PERFORMANCE ACTIONS -->
-<div class="section" id="sec-performance">
-  <div class="card" style="border-left:4px solid #dc2626;">
-    <h2 style="color:#dc2626;">⚠️ Not in Good Standing</h2>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:1.25rem;">Team members currently flagged for performance issues. Documented concerns and action items below.</p>
-
-    <!-- Steven Jatich -->
-    <div style="border:1px solid #fecaca;border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;background:#fef2f2;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem;">
-        <div>
-          <h4 style="font-size:.95rem;margin-bottom:.15rem;">Steven Jatich</h4>
-          <span style="font-size:.82rem;color:var(--text-light);">Director of Partnerships | $100,000</span>
-        </div>
-        <span class="badge" style="background:#fecaca;color:#dc2626;font-weight:700;">Not in Good Standing</span>
-      </div>
-      <div style="margin-bottom:.75rem;">
-        <strong style="font-size:.82rem;">Summary Issues</strong>
-        <ul style="font-size:.82rem;line-height:1.7;margin:.35rem 0 0 1.25rem;color:var(--text);">
-          <li><strong>Not consistently online during core work hours</strong> and frequently misses days without logging PTO or sick time.</li>
-          <li><strong>Unreliable client communication</strong> including a track record of not replying to prospective client emails, creating frustration and lost trust.</li>
-          <li><strong>Kick-off calls go poorly</strong> because clients feel expectations were set without delivery, or there is confusion on scope and next steps.</li>
-          <li><strong>Inconsistent internal briefings</strong> to account management, creating avoidable last-minute panic leading up to kick-offs.</li>
-          <li><strong>Poor project communication and ownership</strong> including audits needing to be rescheduled due to abrupt illness and limited internal clarity on status.</li>
-          <li><strong>Refused to participate in Kahua audit</strong> the night before at 6:30pm, forcing another team member to work late to cover.</li>
-          <li><strong>Tamsen Fadel was under contract for weeks</strong> before Steven initiated kick-off communication with them or the account team. Client was already very upset and the AM team had not been introduced, creating a poor first impression and avoidable escalation.</li>
-        </ul>
-      </div>
-
-      <div style="border-top:1px solid #fecaca;padding-top:.75rem;">
-        <strong style="font-size:.85rem;color:#dc2626;">📋 YTD 2026 Incident Log (by Client)</strong>
-
-        <!-- Golfzon -->
-        <div style="margin-top:.75rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Golfzon</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;margin-bottom:.25rem;"><span style="color:var(--text-light);min-width:75px;">Jan 7</span><span>Will escalated an urgent request to contact a key stakeholder for a website change. Steven apologized for a delay in sharing the stakeholder email and said he had not heard back since before break. Delayed response on an urgent request with limited evidence of earlier escalation.</span></div>
-          </div>
-        </div>
-
-        <!-- Independence Healthcare -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Independence Healthcare Management</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 8</span><span>Said he had just read through the thread and asked for help drafting points about kickoff delays. Reactive ownership and lack of proactive management.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 21</span><span>Gretchen asked whether she should reach out about Meta accounts being disabled. Team had flagged the issue but had not heard back, suggesting it was not driven to resolution by deal leadership.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 26</span><span>Contract link in the business info sheet was broken, blocking basic access for others. Documentation hygiene failure.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 26</span><span>A Jan 15 meeting Steven and Alex were supposed to have with the owner resulted in a no-show. No response from contacts despite follow-ups. Launch blockers including budget confirmation and disabled Meta access. Stalled progress without a clear escalation path.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 28</span><span>Miscommunication on budget recommendation: total budget vs per-location budget. Client-facing messaging error that delays decisions and damages trust.</span></div>
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Jan 28</span><span>Said they did not talk through budget numbers and asked someone else to email the recommended budgets with him copied. Lack of ownership over his own mistake.</span></div>
-          </div>
-        </div>
-
-        <!-- Behavior Frontiers -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Behavior Frontiers</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Jan 22</span><span>Apologized for delay and shared business info link late. Kickoff deck was repurposed and not updated yet. Late prep and incomplete materials close to kickoff.</span></div>
-          </div>
-        </div>
-
-        <!-- Payentry -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Payentry CPS</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 22</span><span>Daren asked Steven to confirm account structure for Google Ads, suggesting Steven had not clearly communicated setup details after the meeting.</span></div>
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Jan 23</span><span>Bruno followed up again on the same account structure question. Loop still not closed.</span></div>
-          </div>
-        </div>
-
-        <!-- Copa Beach Chairs -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Copa Beach Chairs</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 28</span><span>Hannah posted a bump to Steven and deal lead. Thread was waiting on Steven; response time was an issue.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 28</span><span>Cliff emphasized the account had not closed and needed the team to be clear it was still a sales ideation call. Asked Steven to plan to lead. Needed correction on positioning and ownership.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Jan 28</span><span>Cliff asked Steven to send the business info sheet. Missing or not accessible when needed.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 17</span><span>Ashley asked Steven to paste a checklist with current status updates because it was a unique situation.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 18</span><span>Cliff told Steven to complete multiple items ASAP after notifying client of leadership change. Escalation due to inadequate follow-through speed.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 19</span><span>Miscommunication with client about invoice timing. Had to reset expectations that the initial deposit must be paid before more meetings. Billing communication failure impacting cash flow and trust.</span></div>
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Feb 23</span><span>Ashley asked Alex to jump in and cover because Steven was out. Coverage gap during active coordination.</span></div>
-          </div>
-        </div>
-
-        <!-- C60 -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">C60</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 2</span><span>Shelby flagged the client believing Tiger Tracks was managing Bing, but it was not in the contract and the team did not have access. Scope and access control failure tied to deal handoff.</span></div>
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Feb 2</span><span>Steven replied Bing was not audited and did not come up in calls from what he remembered. Scope was not captured or documented clearly, creating downstream confusion.</span></div>
-          </div>
-        </div>
-
-        <!-- Aletha Pitch -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Aletha Pitch</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 17</span><span>Ashley asked Steven or deal lead to create the audit template and confirm when the audit was scheduled. Missing pitch setup steps and uncertainty close to deadline.</span></div>
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Feb 17</span><span>Client had incorrect view access on deck Steven owned. Access validation did not happen early enough to prevent schedule risk.</span></div>
-          </div>
-        </div>
-
-        <!-- MyInvestingClub -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">MyInvestingClub</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 18</span><span>Ashley asked Steven to fill out required information by end of day. Intake work was outstanding and being chased.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 18</span><span>Cliff asked Steven to submit request in client success channel with revenue size and channels. Standard workflow not initiated for resourcing.</span></div>
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 19</span><span>Ashley asked Steven to hyperlink documents so the account team could access them. Info shared without usable access paths, slowing onboarding.</span></div>
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Feb 20</span><span>Corrected himself on scheduling, stating internal and external were already scheduled after previously giving incorrect confirmation. Scheduling accuracy failure.</span></div>
-          </div>
-        </div>
-
-        <!-- Behavior Innovations -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Behavior Innovations</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Feb 18</span><span>Ashley asked Steven to update next steps that night or the next morning and update the internal channel. Missing direction and urgency created by lack of timely update.</span></div>
-          </div>
-        </div>
-
-        <!-- Cleavage Clinic -->
-        <div style="margin-top:.5rem;padding:.75rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Cleavage Clinic</strong>
-          <div style="font-size:.78rem;margin-top:.35rem;line-height:1.7;">
-            <div style="display:flex;gap:.5rem;margin-bottom:.35rem;"><span style="color:var(--text-light);min-width:75px;">Feb 19</span><span>Ashley asked Steven to follow up with the client. Another direct follow-up dependency sitting with Steven.</span></div>
-            <div style="display:flex;gap:.5rem;"><span style="color:var(--text-light);min-width:75px;">Feb 23</span><span>Ashley posted schedule confirmation and noted Steven was out, offering sales-side help. Unavailable during time-sensitive coordination.</span></div>
-          </div>
-        </div>
-
-        <div style="margin-top:.75rem;padding:.6rem;background:#fff;border-radius:8px;border:1px solid #fde8e8;">
-          <strong style="font-size:.82rem;">Pattern Summary:</strong>
-          <span style="font-size:.78rem;color:var(--text);"> 11 clients impacted across Jan-Feb 2026. Recurring themes: delayed responses, missed handoffs, documentation gaps, miscommunications on budgets/scope/scheduling, coverage gaps when absent, and reactive rather than proactive deal management.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Alex Blumberg -->
-    <div style="border:1px solid #fecaca;border-radius:12px;padding:1.25rem;margin-bottom:0;background:#fef2f2;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem;">
-        <div>
-          <h4 style="font-size:.95rem;margin-bottom:.15rem;">Alex Blumberg</h4>
-          <span style="font-size:.82rem;color:var(--text-light);">Head of Partnerships | $175,000</span>
-        </div>
-        <span class="badge" style="background:#fecaca;color:#dc2626;font-weight:700;">Not in Good Standing</span>
-      </div>
-      <div style="margin-bottom:.5rem;">
-        <strong style="font-size:.82rem;">Documented Issues</strong>
-        <ul style="font-size:.82rem;line-height:1.7;margin:.35rem 0 0 1.25rem;color:var(--text);">
-          <li><strong>Does not operate with autonomy.</strong> Core BD responsibilities often require oversight and direction from Cliff to move forward.</li>
-          <li><strong>Has not independently driven a deal through the full sales cycle</strong> without Cliff or someone else's involvement, creating duplicated effort. Two high salaries doing one task.</li>
-          <li><strong>Has not demonstrated team management behaviors</strong> expected of a leader. Direct report continues to underperform (missing meetings, not working full days, not completing tasks) with no effective correction or accountability.</li>
-          <li><strong>Defaults to finger-pointing</strong> instead of taking accountability for outcomes tied to his downline, signaling a lack of managerial ownership.</li>
-          <li><strong>Frequently spends significant time on internal and external calls</strong>, forcing Cliff into BD execution and detracting from CEO priorities.</li>
-          <li><strong>Does not consistently contribute to the audit build process.</strong> Ops has repeatedly needed to step in to ensure audits are organized and built.</li>
-          <li><strong>Consistent distaste for administrative work</strong> including HubSpot setup and management, forcing the company to hire a contractor and increase costs for basic CRM hygiene.</li>
-          <li><strong>Lead generation under his ownership has not been reliable</strong> enough to sustain pipeline needs, contributing to hiring outside consultants to provide leads.</li>
-          <li><strong>Organization and follow-through not at required level.</strong> Pattern suggests he performs better executing clear direction than setting direction independently.</li>
-          <li><strong>Argumentative feedback and pushback</strong> on decisions after direction is set, delaying execution.</li>
-          <li><strong>Reacted poorly when things do not go his way</strong>, including emotional escalations and threats to quit, undermining team stability and leadership credibility.</li>
-        </ul>
-      </div>
-    </div>
-  
-<!-- TERMINATED / ARCHIVED -->
-<div class="card" style="border-left:4px solid #6b7280;margin-top:1.5rem;">
-  <h2 style="color:#6b7280;">🗂️ Terminated / Archived</h2>
-  <p style="font-size:.82rem;color:var(--text-light);margin-bottom:1.25rem;">Former team members who were terminated or departed while under a performance action. Retained for reference.</p>
-
-  <!-- Bruno Milalaf — Terminated -->
-  <div style="border:1px solid #d1d5db;border-radius:12px;padding:1.25rem;background:#f3f4f6;">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem;">
-      <div>
-        <h4 style="font-size:.95rem;margin-bottom:.15rem;text-decoration:line-through;color:#6b7280;">Bruno Milalaf</h4>
-        <span style="font-size:.82rem;color:var(--text-light);">Account Manager · $100,000 · Reports to Charlotte Pohl</span>
-      </div>
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-        <span style="background:#fee2e2;color:#991b1b;font-size:.75rem;font-weight:700;padding:.25em .75em;border-radius:20px;">Terminated</span>
-        <span style="background:#f3f4f6;color:#6b7280;font-size:.75rem;font-weight:600;padding:.25em .75em;border-radius:20px;">Effective March 9, 2026</span>
-      </div>
-    </div>
-    <details style="margin-top:.5rem;">
-      <summary style="font-size:.82rem;font-weight:600;color:#6b7280;cursor:pointer;user-select:none;">View performance record ▸</summary>
-      <div style="margin-top:.75rem;font-size:.82rem;color:var(--text-light);">
-        <p style="font-weight:600;color:var(--text);margin-bottom:.4rem;">Documented Issues (Feb 13, 2026 C/B/R Sync)</p>
-        <ul style="padding-left:1.25rem;line-height:1.9;">
-          <li>Cost the company $4,500 on LFG due to a targeting mistake that required a full client refund.</li>
-          <li>Nearly cost the entire Tenex relationship through mismanagement.</li>
-          <li>No proactive action on Cleavage Clinic, creating a poor client relationship through neglect.</li>
-          <li>Lack of confidence on client calls; answering questions incorrectly rather than confirming and following up.</li>
-        </ul>
-        <p style="font-weight:600;color:var(--text);margin:.75rem 0 .4rem;">Action Items (at time of PIP)</p>
-        <ul style="padding-left:1.25rem;line-height:1.9;">
-          <li>People management removed from scope</li>
-          <li>Onboarding to Rolflex to learn from the best</li>
-          <li>Increased accountability on LFG</li>
-          <li>Rachael joining weekly 1:1s with Charlotte for coaching support</li>
-          <li>Required immediate, sustained improvement — not demonstrated</li>
-        </ul>
-      </div>
-    </details>
-  </div>
-</div>
-
-</div>
-</div>
-
-<!-- CHANGE LOG -->
-<div class="section" id="sec-changelog">
-  <div class="card">
-    <h2>📝 Employee Change Log</h2>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:.75rem;">All compensation and title changes from hire date through Mar 2026 · 43 changes across 25 employees</p>
-    <div style="display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap;align-items:center;">
-      <button class="cl-type-btn active" data-type="all" onclick="clTypeFilter(this)">All</button>
-      <button class="cl-type-btn" data-type="New Hire" onclick="clTypeFilter(this)">New Hire</button>
-      <button class="cl-type-btn" data-type="Raise" onclick="clTypeFilter(this)">Raise</button>
-      <button class="cl-type-btn" data-type="Promotion" onclick="clTypeFilter(this)">Promotion</button>
-      <button class="cl-type-btn" data-type="combo" onclick="clTypeFilter(this)">Promotion + Raise</button>
-      <button class="cl-type-btn" data-type="Termination" onclick="clTypeFilter(this)">Termination</button>
-    </div>
-    <div style="display:flex;gap:.75rem;margin-bottom:.75rem;flex-wrap:wrap;align-items:center;">
-      <input type="text" id="clSearch" placeholder="Search by name..." oninput="filterChangeLog()" style="max-width:220px;">
-      <a href="javascript:void(0)" onclick="toggleAllCL(true)" style="font-size:.82rem;color:var(--accent);">Expand all</a>
-      <span style="color:var(--text-light);font-size:.82rem;">|</span>
-      <a href="javascript:void(0)" onclick="toggleAllCL(false)" style="font-size:.82rem;color:var(--accent);">Collapse all</a>
-    </div>
-    <div id="changeLogList"></div>
-  </div>
-</div>
-
-</div>
-
-
-<!-- PAYROLL SCHEDULE -->
-<div class="section" id="sec-payroll">
-  <div class="card">
-    <h2>💳 Payroll Processing Schedule</h2>
-    <p style="font-size:.85rem;color:var(--text-light);margin-bottom:1.25rem;">Tiger Tracks LLC · Bi-Weekly · Client ID: 4688 · Generated 2/9/2026</p>
-
-    <!-- Next pay date banner -->
-    <div id="payroll-next-banner" style="background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;gap:2rem;flex-wrap:wrap;align-items:center;">
-      <div>
-        <div style="font-size:.75rem;opacity:.8;text-transform:uppercase;letter-spacing:.05em;">Next Pay Date</div>
-        <div id="payroll-next-date" style="font-size:1.4rem;font-weight:800;">—</div>
-      </div>
-      <div>
-        <div style="font-size:.75rem;opacity:.8;text-transform:uppercase;letter-spacing:.05em;">Current Pay Period</div>
-        <div id="payroll-current-period" style="font-size:1.1rem;font-weight:700;">—</div>
-      </div>
-      <div>
-        <div style="font-size:.75rem;opacity:.8;text-transform:uppercase;letter-spacing:.05em;">Submission Deadline</div>
-        <div id="payroll-submit-deadline" style="font-size:1.1rem;font-weight:700;">—</div>
-      </div>
-      <div style="margin-left:auto;font-size:.8rem;opacity:.75;">Days until pay day: <span id="payroll-days-away" style="font-weight:700;">—</span></div>
-    </div>
-
-    <!-- Year filter -->
-    <div style="display:flex;gap:.5rem;margin-bottom:1rem;align-items:center;">
-      <span style="font-size:.82rem;color:var(--text-light);font-weight:600;">Show:</span>
-      <button onclick="filterPayrollYear('all')" id="pyr-all" class="pyr-btn pyr-active" style="font-size:.78rem;padding:.3rem .75rem;border-radius:20px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;">All</button>
-      <button onclick="filterPayrollYear('2026')" id="pyr-2026" class="pyr-btn" style="font-size:.78rem;padding:.3rem .75rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;">2026</button>
-      <button onclick="filterPayrollYear('2027')" id="pyr-2027" class="pyr-btn" style="font-size:.78rem;padding:.3rem .75rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;">2027</button>
-      <span style="margin-left:auto;font-size:.78rem;color:var(--text-light);">Bi-weekly · 26–27 periods/year</span>
-    </div>
-
-    <!-- Table -->
-    <div style="overflow-x:auto;">
-      <table id="payroll-table" style="width:100%;border-collapse:collapse;font-size:.82rem;">
-        <thead>
-          <tr style="background:var(--card-bg);border-bottom:2px solid var(--border);">
-            <th style="padding:.6rem .75rem;text-align:left;white-space:nowrap;">#</th>
-            <th style="padding:.6rem .75rem;text-align:left;white-space:nowrap;">Pay Period</th>
-            <th style="padding:.6rem .75rem;text-align:left;white-space:nowrap;">Submission Deadline</th>
-            <th style="padding:.6rem .75rem;text-align:left;white-space:nowrap;">Pay Date</th>
-            <th style="padding:.6rem .75rem;text-align:center;white-space:nowrap;">Flags</th>
-          </tr>
-        </thead>
-        <tbody id="payroll-body"></tbody>
-      </table>
-    </div>
-    <p style="font-size:.75rem;color:var(--text-light);margin-top:.75rem;">* Submission deadline is 2 days before pay date. M = First period of month · Q = First of quarter · Y = First of year.</p>
-  </div>
-</div>
-
-</div><!-- /appContent -->
 
 <script>
-// ===== AUTH =====
-var ALLOWED_EMAILS=['cliff@tigertracks.ai','elizabeth@tigertracks.ai','henry@tigertracks.ai'];
+var googleToken = null;
 
-function handleCompLogin(response){
-  var errEl=document.getElementById('loginError');
-  errEl.style.display='none';
-  try {
-    var payload=JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
-    var email=(payload.email||'').toLowerCase();
-    if(ALLOWED_EMAILS.indexOf(email)<0){
-      errEl.textContent='Access denied. This page is restricted to authorized leadership only.';
-      errEl.style.display='block';return;
-    }
-    localStorage.setItem('tt_comp_email',email);
-    localStorage.setItem('tt_comp_exp',String(Date.now()+30*24*60*60*1000));
-    enterComp();
-  } catch(e){
-    errEl.textContent='Sign-in error. Please try again.';errEl.style.display='block';
+function handleCompLogin(response) {
+  var errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+  if (!response || !response.credential) {
+    errEl.textContent = 'Sign-in failed. Please try again.';
+    errEl.style.display = 'block';
+    return;
   }
+  googleToken = response.credential;
+  sessionStorage.setItem('tt_comp_token', response.credential);
+  fetchData(response.credential);
 }
 
-function enterComp(){
-  document.getElementById('loginGate').style.display='none';
-  document.getElementById('appContent').style.display='';
+function fetchData(token) {
+  var errEl = document.getElementById('loginError');
+  var loading = document.getElementById('loginLoading');
+  if (loading) loading.style.display = 'block';
+  fetch('/api/data', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  })
+  .then(function(r) {
+    if (r.status === 401 || r.status === 403) {
+      sessionStorage.removeItem('tt_comp_token');
+      if (loading) loading.style.display = 'none';
+      errEl.textContent = 'Access denied. This page is restricted to authorized leadership only.';
+      errEl.style.display = 'block';
+      return null;
+    }
+    return r.json();
+  })
+  .then(function(data) {
+    if (!data || !data.ok) return;
+    if (loading) loading.style.display = 'none';
+    // Inject app HTML
+    document.getElementById('appContent').innerHTML = data.html;
+    // Set global data vars
+    window.employees = data.employees;
+    window.bands = data.bands;
+    window.clRows = data.clRows;
+    window.payrollData = data.payrollData;
+    // Show app
+    document.getElementById('loginGate').style.display = 'none';
+    document.getElementById('appContent').style.display = '';
+    // Initialize charts and UI
+    initApp();
+  })
+  .catch(function(e) {
+    if (loading) loading.style.display = 'none';
+    errEl.textContent = 'Connection error. Please try again.';
+    errEl.style.display = 'block';
+    console.error(e);
+  });
 }
 
-// Auto-login
+function initApp() {
+  renderCompTable();
+  renderPayrollBanner();
+  renderPayrollTable();
+  // Charts
+  try { initCharts(); } catch(e) { console.warn('Charts:', e); }
+}
+
+// Auto-login with stored token
 (function(){
-  var email=localStorage.getItem('tt_comp_email');
-  var exp=parseInt(localStorage.getItem('tt_comp_exp')||'0');
-  if(email&&exp>Date.now()&&ALLOWED_EMAILS.indexOf(email)>=0){
-    enterComp();
+  var storedToken = sessionStorage.getItem('tt_comp_token');
+  if (storedToken) {
+    googleToken = storedToken;
+    fetchData(storedToken);
   }
 })();
-
-// ===== DATA =====
-var employees = [
-  {name:"Riley Abercrombie",role:"Associate Director",salary:150000,changes:3},
-  {name:"Billy Bevevino",role:"Account Strategist",salary:85000,changes:2},
-  {name:"Alex Blumberg",role:"Head of Partnerships",salary:175000,changes:1},
-  {name:"Megan Brenneke",role:"Account Coordinator",salary:75000,changes:1},
-  {name:"Tate Dewey",role:"Account Strategist",salary:95000,changes:1},
-  {name:"Camryn Hershman",role:"Executive Assistant",salary:65000,changes:1},
-  {name:"Gretchen Hess",role:"Account Manager",salary:117000,changes:2},
-  {name:"Steven Jatich",role:"Partnerships Director",salary:100000,changes:1},
-  {name:"Ashley Kaika",role:"VP of Partnerships",salary:180000,changes:1},
-  {name:"Daren Kalkoffen",role:"Account Strategist",salary:90000,changes:1},
-  {name:"Megan Klein",role:"Account Manager",salary:95000,changes:2},
-  {name:"Kersten Kruse",role:"Director of Client Success",salary:155000,changes:4},
-  {name:"Evin Leclerc",role:"Account Coordinator",salary:60000,changes:1},
-  {name:"Allison Long",role:"Senior Account Manager",salary:95000,changes:1,partTime:true},
-  {name:"Mary McCambridge",role:"Senior Account Manager",salary:135000,changes:1},
-  {name:"Seth McDaniel",role:"Account Strategist",salary:95000,changes:1},
-  {name:"Bruno Milalaf",role:"Account Manager",salary:100000,changes:1},
-  {name:"Shelby Nations",role:"Senior Account Manager",salary:140000,changes:1},
-  {name:"Owen Phipps",role:"Account Strategist",salary:85000,changes:3},
-  {name:"Charlotte Pohl",role:"Associate Director",salary:145000,changes:3},
-  {name:"Hannah Price",role:"Associate Director",salary:145000,changes:1},
-  {name:"Kiyana Saidi-Nejad",role:"Account Manager",salary:117500,changes:3},
-  {name:"Rachael Scharett",role:"Senior Director",salary:155000,changes:3},
-  {name:"Sanad Shuman",role:"Account Coordinator",salary:68000,changes:1},
-  {name:"Will Sokol",role:"Senior Account Manager",salary:122250,changes:3}
-];
-
-var bands = {
-  "Account Coordinator":       {low:60000,high:75000,marketLow:40000,marketHigh:66000,marketAvg:50000,next:"Account Strategist"},
-  "Account Strategist":        {low:85000,high:95000,marketLow:55000,marketHigh:85000,marketAvg:65000,next:"Account Manager"},
-  "Account Manager":           {low:95000,high:135000,marketLow:59000,marketHigh:105000,marketAvg:75000,next:"Senior Account Manager"},
-  "Senior Account Manager":    {low:122000,high:140000,marketLow:84000,marketHigh:134000,marketAvg:100000,next:"Associate Director"},
-  "Associate Director":        {low:145000,high:150000,marketLow:79000,marketHigh:169000,marketAvg:119000,next:null},
-  "Director of Client Success": {low:155000,high:175000,marketLow:97000,marketHigh:168000,marketAvg:134000,next:"Senior Director"},
-  "Senior Director":           {low:155000,high:170000,marketLow:97000,marketHigh:168000,marketAvg:134000,next:null},
-  "Partnerships Director":     {low:100000,high:130000,marketLow:80000,marketHigh:140000,marketAvg:100000,next:"Head of Partnerships"},
-  "Head of Partnerships":      {low:150000,high:175000,marketLow:100000,marketHigh:175000,marketAvg:140000,next:"VP of Partnerships"},
-  "VP of Partnerships":        {low:170000,high:200000,marketLow:140000,marketHigh:200000,marketAvg:170000,next:null},
-  "Director of Marketing":     {low:100000,high:155000,marketLow:56000,marketHigh:154000,marketAvg:97000,next:null},
-  "Executive Assistant":       {low:55000,high:75000,marketLow:45000,marketHigh:70000,marketAvg:55000,next:null}
-};
 
 function bandPct(emp){
   var b=bands[emp.role];
@@ -947,6 +241,7 @@ function switchTabDirect(id){
   for(var i=0;i<tabs.length;i++){if(tabs[i].getAttribute('onclick').indexOf("'"+id+"'")>-1){tabs[i].classList.add('active');break;}}
 }
 
+function initCharts(){
 // ===== CHARTS =====
 var tealPalette=['#229FA1','#1a7a7c','#2bbfc2','#17696b','#3dd4d7','#0f5455'];
 
@@ -1121,6 +416,7 @@ var tealPalette=['#229FA1','#1a7a7c','#2bbfc2','#17696b','#3dd4d7','#0f5455'];
     }
   });
 })();
+}
 
 // 5. Full Table (sortable)
 var roleOrder=["Account Coordinator","Account Strategist","Account Manager","Senior Account Manager","Associate Director","Director of Client Success","Senior Director","Partnerships Director","Head of Partnerships","VP of Partnerships","Director of Marketing","Executive Assistant"];
@@ -1176,80 +472,7 @@ function renderCompTable(){
 renderCompTable();
 
 // ===== CHANGE LOG =====
-var clRows = [
-  {name:"Abercrombie, Riley Cedro",date:"12/30/2024",type:"Raise",prevTitle:"Account Manager",newTitle:"Senior Account Manager",prevSal:"$100,000",newSal:"$106,000",pct:"6.00%"},
-  {name:"Abercrombie, Riley Cedro",date:"02/10/2025",type:"Raise",prevTitle:"",newTitle:"",prevSal:"$106,000",newSal:"$120,000",pct:"13.21%"},
-  {name:"Abercrombie, Riley Cedro",date:"03/01/2025",type:"Raise",prevTitle:"",newTitle:"",prevSal:"$120,000",newSal:"$140,000",pct:"16.67%"},
-  {name:"Abercrombie, Riley Cedro",date:"10/06/2025",type:"Raise",prevTitle:"",newTitle:"",prevSal:"$140,000",newSal:"$150,000",pct:"7.14%"},
-  {name:"Abercrombie, Riley Cedro",date:"01/06/2026",type:"Promotion",prevTitle:"Senior Account Manager",newTitle:"Associate Director",prevSal:"$150,000",newSal:"$150,000",pct:""},
-  {name:"Bevevino, William",date:"10/06/2025",type:"Raise + Promotion",prevTitle:"Account Coordinator",newTitle:"Account Strategist",prevSal:"$75,000",newSal:"$85,000",pct:"13.33%"},
-  {name:"Blumberg, Alex",date:"06/01/2025",type:"New Hire",prevTitle:"",newTitle:"Head of Partnerships",prevSal:"",newSal:"$175,000",pct:""},
-  {name:"Brenneke, Megan",date:"07/21/2025",type:"New Hire",prevTitle:"",newTitle:"Account Coordinator",prevSal:"",newSal:"$75,000",pct:""},
-  {name:"Dewey, Tate",date:"09/22/2025",type:"New Hire",prevTitle:"",newTitle:"Account Strategist",prevSal:"",newSal:"$95,000",pct:""},
-  {name:"Hershman, Camryn",date:"09/29/2025",type:"New Hire",prevTitle:"",newTitle:"Executive Assistant",prevSal:"",newSal:"$65,000",pct:""},
-  {name:"Hess, Gretchen",date:"12/30/2024",type:"Raise",prevTitle:"",newTitle:"",prevSal:"$90,000",newSal:"$100,000",pct:"11.10%"},
-  {name:"Hess, Gretchen",date:"06/02/2025",type:"Raise",prevTitle:"Account Manager",newTitle:"Account Manager",prevSal:"$100,000",newSal:"$107,000",pct:"7.00%"},
-  {name:"Hess, Gretchen",date:"10/06/2025",type:"Raise",prevTitle:"Account Manager",newTitle:"Account Manager",prevSal:"$107,000",newSal:"$117,000",pct:"9.35%"},
-  {name:"Jatich, Steven",date:"04/21/2025",type:"Raise",prevTitle:"Director of Partnerships",newTitle:"Director of Partnerships",prevSal:"$75,000",newSal:"$100,000",pct:"33.33%"},
-  {name:"Kaika, Ashley",date:"02/11/2026",type:"Promotion + Raise",prevTitle:"Contractor (1099)",newTitle:"VP of Partnerships",prevSal:"$0 (1099)",newSal:"$180,000",pct:""},
-  {name:"Kalkoffen, Daren",date:"11/10/2025",type:"New Hire",prevTitle:"",newTitle:"Account Strategist",prevSal:"",newSal:"$90,000",pct:""},
-  {name:"Klein, Megan",date:"11/03/2025",type:"Raise + Promotion",prevTitle:"Account Strategist",newTitle:"Account Manager",prevSal:"$85,000",newSal:"$95,000",pct:"11.76%"},
-  {name:"Kruse, Kersten Therese",date:"04/21/2025",type:"Raise + Promotion",prevTitle:"Account Manager",newTitle:"Associate Director",prevSal:"$130,000",newSal:"$145,000",pct:"11.54%"},
-  {name:"Kruse, Kersten Therese",date:"10/06/2025",type:"Raise",prevTitle:"Associate Director",newTitle:"Associate Director",prevSal:"$145,000",newSal:"$155,000",pct:"6.90%"},
-  {name:"Kruse, Kersten Therese",date:"01/06/2026",type:"Promotion",prevTitle:"Associate Director",newTitle:"Director of Client Success",prevSal:"$155,000",newSal:"$155,000",pct:""},
-  {name:"Leclerc, Evin",date:"09/22/2025",type:"New Hire",prevTitle:"",newTitle:"Account Coordinator",prevSal:"",newSal:"$60,000",pct:""},
-  {name:"Long, Allison Page",date:"11/13/2025",type:"New Hire",prevTitle:"",newTitle:"Senior Account Manager",prevSal:"",newSal:"$95,000",pct:""},
-  {name:"McCambridge, Mary",date:"10/20/2025",type:"New Hire",prevTitle:"",newTitle:"Senior Account Manager",prevSal:"",newSal:"$135,000",pct:""},
-  {name:"McDaniel, Seth",date:"02/02/2026",type:"New Hire",prevTitle:"",newTitle:"Account Strategist",prevSal:"",newSal:"$95,000",pct:""},
-  {name:"Millalaf, Bruno",date:"12/01/2025",type:"New Hire",prevTitle:"",newTitle:"Account Manager",prevSal:"",newSal:"$100,000",pct:""},
-  {name:"Millalaf, Bruno",date:"03/09/2026",type:"Termination",prevTitle:"Account Manager",newTitle:"",prevSal:"$100,000",newSal:"",pct:""},
-  {name:"Nations, Jessica Shelby",date:"02/10/2025",type:"New Hire",prevTitle:"",newTitle:"Senior Account Manager",prevSal:"",newSal:"$140,000",pct:""},
-  {name:"Phipps, Owen",date:"12/01/2024",type:"Raise",prevTitle:"",newTitle:"",prevSal:"$62,000",newSal:"$70,000",pct:"12.90%"},
-  {name:"Phipps, Owen",date:"04/21/2025",type:"Raise",prevTitle:"Account Coordinator",newTitle:"Account Coordinator",prevSal:"$70,000",newSal:"$75,000",pct:"7.14%"},
-  {name:"Phipps, Owen",date:"10/17/2025",type:"Raise + Promotion",prevTitle:"Account Coordinator",newTitle:"Account Strategist",prevSal:"$75,000",newSal:"$85,000",pct:"13.33%"},
-  {name:"Pohl, Charlotte",date:"10/06/2025",type:"Raise + Promotion",prevTitle:"Account Manager",newTitle:"Senior Account Manager",prevSal:"$125,000",newSal:"$135,000",pct:"8.00%"},
-  {name:"Pohl, Charlotte",date:"01/08/2026",type:"Promotion + Raise",prevTitle:"Senior Account Manager",newTitle:"Associate Director",prevSal:"$135,000",newSal:"$145,000",pct:"7.41%"},
-  {name:"Price, Hannah",date:"01/06/2026",type:"Promotion + Raise",prevTitle:"Senior Account Manager",newTitle:"Associate Director",prevSal:"$135,000",newSal:"$145,000",pct:"7.41%"},
-  {name:"Saidi-Nejad, Kiyana",date:"06/20/2025",type:"Raise",prevTitle:"Acct Strategist & Special Projects",newTitle:"Acct Strategist & Special Projects",prevSal:"$82,000",newSal:"$87,000",pct:"6.10%"},
-  {name:"Saidi-Nejad, Kiyana",date:"09/12/2025",type:"Promotion + Raise",prevTitle:"Acct Strategist & Special Projects",newTitle:"Account Manager",prevSal:"$87,000",newSal:"$110,000",pct:"26.44%"},
-  {name:"Saidi-Nejad, Kiyana",date:"12/01/2025",type:"Raise",prevTitle:"Account Manager",newTitle:"Account Manager",prevSal:"$110,000",newSal:"$117,500",pct:"6.82%"},
-  {name:"Scharett, Rachael",date:"07/15/2025",type:"Promotion + Raise",prevTitle:"Senior Account Manager",newTitle:"Associate Director",prevSal:"$125,000",newSal:"$145,000",pct:"16.00%"},
-  {name:"Scharett, Rachael",date:"10/06/2025",type:"Raise",prevTitle:"Associate Director",newTitle:"Associate Director",prevSal:"$145,000",newSal:"$155,000",pct:"6.90%"},
-  {name:"Scharett, Rachael",date:"01/06/2026",type:"Promotion",prevTitle:"Associate Director",newTitle:"Sr. Director of Client Success",prevSal:"$155,000",newSal:"$155,000",pct:""},
-  {name:"Shuman, Sanad",date:"01/12/2026",type:"New Hire",prevTitle:"",newTitle:"Account Coordinator",prevSal:"",newSal:"$68,000",pct:""},
-  {name:"Sokol, William",date:"08/25/2025",type:"New Hire",prevTitle:"",newTitle:"Account Manager",prevSal:"",newSal:"$115,000",pct:""},
-  {name:"Sokol, William",date:"12/01/2025",type:"Raise",prevTitle:"Account Manager",newTitle:"Account Manager",prevSal:"$115,000",newSal:"$122,250",pct:"6.30%"},
-  {name:"Sokol, William",date:"01/06/2026",type:"Promotion",prevTitle:"Account Manager",newTitle:"Senior Account Manager",prevSal:"$122,250",newSal:"$122,250",pct:""}
-];
 
-// Current titles/salaries for headers
-var clCurrent={
-  "Abercrombie, Riley Cedro":{title:"Associate Director",salary:"$150,000"},
-  "Bevevino, William":{title:"Account Strategist",salary:"$85,000"},
-  "Blumberg, Alex":{title:"Head of Partnerships",salary:"$175,000"},
-  "Brenneke, Megan":{title:"Account Coordinator",salary:"$75,000"},
-  "Dewey, Tate":{title:"Account Strategist",salary:"$95,000"},
-  "Hershman, Camryn":{title:"Executive Assistant",salary:"$65,000"},
-  "Hess, Gretchen":{title:"Account Manager",salary:"$117,000"},
-  "Jatich, Steven":{title:"Director of Partnerships",salary:"$100,000"},
-  "Kaika, Ashley":{title:"VP of Partnerships",salary:"$180,000"},
-  "Kalkoffen, Daren":{title:"Account Strategist",salary:"$90,000"},
-  "Klein, Megan":{title:"Account Manager",salary:"$95,000"},
-  "Kruse, Kersten Therese":{title:"Director of Client Success",salary:"$155,000"},
-  "Leclerc, Evin":{title:"Account Coordinator",salary:"$60,000"},
-  "Long, Allison Page":{title:"Senior Account Manager",salary:"$95,000"},
-  "McCambridge, Mary":{title:"Senior Account Manager",salary:"$135,000"},
-  "McDaniel, Seth":{title:"Account Strategist",salary:"$95,000"},
-  "Millalaf, Bruno":{title:"Account Manager",salary:"$100,000"},
-  "Nations, Jessica Shelby":{title:"Senior Account Manager",salary:"$140,000"},
-  "Phipps, Owen":{title:"Account Strategist",salary:"$85,000"},
-  "Pohl, Charlotte":{title:"Associate Director",salary:"$145,000"},
-  "Price, Hannah":{title:"Associate Director",salary:"$145,000"},
-  "Saidi-Nejad, Kiyana":{title:"Account Manager",salary:"$117,500"},
-  "Scharett, Rachael":{title:"Sr. Director of Client Success",salary:"$155,000"},
-  "Shuman, Sanad":{title:"Account Coordinator",salary:"$68,000"},
-  "Sokol, William":{title:"Senior Account Manager",salary:"$122,250"}
-};
 
 var typeMeta={
   "New Hire":{label:"New Hire",icon:"+",bg:"#e0f7f7",color:"#229FA1",dot:"teal"},
