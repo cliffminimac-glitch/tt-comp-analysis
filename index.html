@@ -722,7 +722,7 @@ function renderPayrollTable() {
       + '<td style="padding:.55rem .75rem;white-space:nowrap;">' + fmtShort(p.begin) + ' – ' + fmtShort(p.end) + label + '</td>'
       + '<td style="padding:.55rem .75rem;white-space:nowrap;">' + fmtPayDate(p.process) + '</td>'
       + '<td style="padding:.55rem .75rem;white-space:nowrap;font-weight:700;color:var(--accent);">' + fmtPayDate(p.payDate) + '</td>'
-      + '<td style="padding:.55rem .75rem;text-align:right;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600;">' + (p.totalPayroll ? '$'+p.totalPayroll.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '<span style="color:var(--text-light);font-size:.75em;">—</span>') + '</td>'
+      + '<td style="padding:.55rem .75rem;text-align:right;font-variant-numeric:tabular-nums;">' + (p.totalPayroll ? '<span style="color:var(--accent);font-weight:600;">$'+p.totalPayroll.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'</span>' : p.forecastedPayroll ? '<span style="color:var(--text-light);font-style:italic;font-size:.9em;" title="'+(p.forecastNote||'Forecasted based on recent actuals')+'">~$'+p.forecastedPayroll.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'</span>' : '<span style="color:var(--text-light);font-size:.75em;">—</span>') + '</td>'
       + '<td style="padding:.55rem .75rem;text-align:center;">' + flags + '</td>'
       + '</tr>';
   });
