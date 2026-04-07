@@ -194,6 +194,15 @@ function initApp() {
   renderCompTable();
   renderPayrollBanner();
   renderPayrollTable();
+  // Build clCurrent map (name -> {title, salary}) for the changelog headers
+  window.clCurrent = {};
+  if (window.employees) {
+    window.employees.forEach(function(e) {
+      window.clCurrent[e.name] = {title: e.role, salary: '$' + e.salary.toLocaleString()};
+    });
+  }
+  // Render the Change Log
+  filterChangeLog();
   // Charts
   try { initCharts(); } catch(e) { console.warn('Charts:', e); }
 }
