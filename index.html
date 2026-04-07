@@ -484,7 +484,7 @@ function renderCompTable(){
     body.appendChild(tr);
   });
 }
-renderCompTable();
+if (typeof employees !== 'undefined') { renderCompTable(); }
 
 // ===== CHANGE LOG =====
 
